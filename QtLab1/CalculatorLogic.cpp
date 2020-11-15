@@ -72,7 +72,7 @@ void CalculatorLogic::doCommand(QString btn)
         brisanje = true;
         emit resultChanged(btn);
     }
-    else
+    else //tacka
     {
         trenutnaVrednost = btn.toDouble();
         emit resultChanged(btn);
