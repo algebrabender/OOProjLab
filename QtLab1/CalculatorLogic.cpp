@@ -224,7 +224,6 @@ void CalculatorLogic::doCommand(QString btn)
             vrednost = novaVred.toDouble();
             rezultat = novaVred;
         }
-
     }
     emit resultChanged(rezultat);
 }
