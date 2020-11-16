@@ -30,7 +30,6 @@ Widget::Widget(QWidget *parent)
     connect(ui->backspace, SIGNAL(clicked()), this, SLOT(onBtnClicked()));
     connect(calculatorLogic, SIGNAL(resultChanged(QString)), this, SLOT(onResultChanged()));
     connect(calculatorLogic, SIGNAL(resultHistoryChanged(QString)), this, SLOT(onResultHistoryChanged()));
-
 }
 
 Widget::~Widget()
