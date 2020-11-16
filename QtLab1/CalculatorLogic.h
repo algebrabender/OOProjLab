@@ -34,7 +34,6 @@ public:
     signals:
     void resultChanged(QString);
     void resultHistoryChanged(QString);
-
 };
 
 #endif // CALCULATORLOGIC_H
