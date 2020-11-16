@@ -2,6 +2,7 @@
 #define CALCULATORLOGIC_H
 
 #include <QObject>
+#include <QtMath>
 
 class CalculatorLogic : public QObject
 {
@@ -9,6 +10,11 @@ class CalculatorLogic : public QObject
 public:
     explicit CalculatorLogic(QObject *parent = 0);
     double trenutnaVrednost;
+    double vrednost;
+    double zaOperacije;
+    QString rezultat;
+    QString zaIstoriju;
+    QString istorija;
     bool sabiranje;
     bool oduzimanje;
     bool mnozenje;
@@ -19,6 +25,11 @@ public:
     bool korenovanje;
     bool brisanjeCifre;
     bool tacka;
+    bool sabZaJednako;
+    bool oduZaJednako;
+    bool mnoZaJednako;
+    bool delZaJednako;
+
     void doCommand(QString btn);
 
     signals:

@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "CalculatorLogic.h"
-#include <QtMath>
 
 QT_BEGIN_NAMESPACE
 
@@ -30,13 +29,5 @@ public slots:
 private:
     Ui::Widget *ui;
     CalculatorLogic *calculatorLogic;
-    double rezultatVrednost;
-    QString rezultat;
-    QString zaIstoriju;
-    QString istorija;
-    bool sabiranje;
-    bool oduzimanje;
-    bool mnozenje;
-    bool deljenje;
 };
 #endif // WIDGET_H
