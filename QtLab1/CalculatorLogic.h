@@ -14,7 +14,6 @@ public:
     double zaOperacije;
     QString rezultat;
     QString zaIstoriju;
-    QString istorija;
     bool sabiranje;
     bool oduzimanje;
     bool mnozenje;
