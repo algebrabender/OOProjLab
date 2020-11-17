@@ -75,21 +75,20 @@ void CalculatorLogic::doCommand(QString btn)
             && !korenovanje && !brisanje && !brisanjeCifre
             && !promenaZnaka && !tacka)
     {
+
         if (vrednost == 0 || rezultat.compare("nan") == 0 || jednakoPoslednje)
         {
+            if (zaIstoriju.compare("0") == 0)
+                            zaIstoriju = "";
             if (jednakoPoslednje) //posle = sledi novi broj
             {
                 rezultat = QString::number(trenutnaVrednost);
                 jednakoPoslednje = false;
             }
+            if(rezultat.contains(".")) //ako je prva nula pa tacka
+                rezultat += QString::number(trenutnaVrednost);
             else
-            {
-                zaIstoriju = ""; //sigurno prvo dugme nije bilo operacija pa je potrebno da se izbrise pocetna nula
-                if(rezultat.contains(".")) //ako je prva nula pa tacka
-                    rezultat += QString::number(trenutnaVrednost);
-                else
-                    rezultat = QString::number(trenutnaVrednost);
-            }
+                rezultat = QString::number(trenutnaVrednost);
             vrednost = rezultat.toDouble();
         }
         else
@@ -104,7 +103,7 @@ void CalculatorLogic::doCommand(QString btn)
     {
         if (sabZaJednako || oduZaJednako || mnoZaJednako || delZaJednako) //da bi operacije mogle da budu nadovezane
         {
-            //provera da prethodno nije bila operacija brisanja ili tacka jer onda nije jos potrebno do se updatuje vrednost zaOperacije
+            //dodatne provere da prethodno nije bila operacija brisanja ili tacka jer onda nije jos potrebno do se updatuje vrednost zaOperacije
             if (sabZaJednako && !brisanjeCifre && !tacka && !promenaZnaka)
             {
                 zaOperacije += vrednost;
@@ -220,10 +219,16 @@ void CalculatorLogic::doCommand(QString btn)
                     vrednost = novaVred.toDouble();
                 }
             }
+            else
+            {
+                if (rezultat.contains("."))
+                    rezultat.chop(1);
+            }
         }
         else //tacka
         {
             tacka = false;
+            jednakoPoslednje = false; //da bi osigurali da ukoliko nova cifra posle = bude broj.broj
             if (!rezultat.contains("."))
             {
                 QString novaVred = QString::number(vrednost)+".";
