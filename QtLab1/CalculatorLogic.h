@@ -10,10 +10,6 @@ class CalculatorLogic : public QObject
 public:
     explicit CalculatorLogic(QObject *parent = 0);
     double trenutnaVrednost;
-    double vrednost;
-    double zaOperacije;
-    QString rezultat;
-    QString zaIstoriju;
     bool sabiranje;
     bool oduzimanje;
     bool mnozenje;
@@ -28,6 +24,12 @@ public:
     bool oduZaJednako;
     bool mnoZaJednako;
     bool delZaJednako;
+    bool jednakoPoslednje;
+    double vrednost;
+    double zaOperacije;
+    QString rezultat;
+    QString zaIstoriju;
+    QString istorija;
 
     void doCommand(QString btn);
 

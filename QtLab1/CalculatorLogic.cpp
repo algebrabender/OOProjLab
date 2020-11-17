@@ -4,6 +4,7 @@ CalculatorLogic::CalculatorLogic(QObject *parent) : QObject(parent)
 {
     trenutnaVrednost = 0.0;
     vrednost = 0.0;
+    zaIstoriju = "0";
     sabiranje = false;
     oduzimanje = false;
     mnozenje = false;
@@ -18,6 +19,7 @@ CalculatorLogic::CalculatorLogic(QObject *parent) : QObject(parent)
     oduZaJednako = false;
     mnoZaJednako = false;
     delZaJednako = false;
+    jednakoPoslednje = false;
 }
 
 void CalculatorLogic::doCommand(QString btn)
@@ -68,13 +70,26 @@ void CalculatorLogic::doCommand(QString btn)
         trenutnaVrednost = btn.toDouble();
     }
 
+    //logika
     if (!sabiranje && !oduzimanje && !mnozenje && !deljenje && !jednako
             && !korenovanje && !brisanje && !brisanjeCifre
             && !promenaZnaka && !tacka)
     {
-        if (vrednost == 0.0 || vrednost == 0 || rezultat.compare("nan") == 0)
+        if (vrednost == 0 || rezultat.compare("nan") == 0 || jednakoPoslednje)
         {
-            rezultat = QString::number(trenutnaVrednost);
+            if (jednakoPoslednje) //posle = sledi novi broj
+            {
+                rezultat = QString::number(trenutnaVrednost);
+                jednakoPoslednje = false;
+            }
+            else
+            {
+                zaIstoriju = ""; //sigurno prvo dugme nije bilo operacija pa je potrebno da se izbrise pocetna nula
+                if(rezultat.contains(".")) //ako je prva nula pa tacka
+                    rezultat += QString::number(trenutnaVrednost);
+                else
+                    rezultat = QString::number(trenutnaVrednost);
+            }
             vrednost = rezultat.toDouble();
         }
         else
@@ -84,145 +99,137 @@ void CalculatorLogic::doCommand(QString btn)
             vrednost = rezultat.toDouble();
         }
     }
-    else if (sabiranje || oduzimanje || mnozenje || deljenje) //neka od binarnih operacija
+    //potencijalno kod moze da se optimizuje
+    else
     {
-        zaOperacije = vrednost;
-        if (sabiranje)
+        if (sabZaJednako || oduZaJednako || mnoZaJednako || delZaJednako) //da bi operacije mogle da budu nadovezane
         {
-            zaIstoriju = rezultat + " + ";
-            sabiranje = false;
-            sabZaJednako = true;
-        }
-        else if (oduzimanje)
-        {
-            zaIstoriju = rezultat + " - ";
-            oduzimanje = false;
-            oduZaJednako = true;
-        }
-        else if (mnozenje)
-        {
-            zaIstoriju = rezultat + " * ";
-            mnozenje = false;
-            mnoZaJednako = true;
+            //provera da prethodno nije bila operacija brisanja ili tacka jer onda nije jos potrebno do se updatuje vrednost zaOperacije
+            if (sabZaJednako && !brisanjeCifre && !tacka && !promenaZnaka)
+            {
+                zaOperacije += vrednost;
+                sabZaJednako = false;
+            }
+            else if (oduZaJednako && !brisanjeCifre && !tacka && !promenaZnaka)
+            {
+                zaOperacije -= vrednost;
+                oduZaJednako = false;
+            }
+            else if (mnoZaJednako && !brisanjeCifre && !tacka && !promenaZnaka)
+            {
+                zaOperacije *= vrednost;
+                mnoZaJednako = false;
+            }
+            else if (delZaJednako && !brisanjeCifre && !tacka && !promenaZnaka)
+            {
+                if (vrednost != 0)
+                    zaOperacije /= vrednost;
+                else
+                {
+                    QString nonumb = "nan";
+                    zaOperacije = nonumb.toDouble();
+                }
+                delZaJednako = false;
+            }
         }
         else
         {
-            zaIstoriju = rezultat + " / ";
-            deljenje = false;
-            delZaJednako = true;
+            zaOperacije = vrednost;
         }
-        rezultat = "";
-    }
-    else if (jednako)
-    {
-        zaIstoriju += QString::number(vrednost);
-        if (sabZaJednako)
+        if (sabiranje || oduzimanje || mnozenje || deljenje) //neka od binarnih operacija
         {
-            sabZaJednako = false;
-            jednako = false;
-            zaIstoriju += " = ";
-            double novaVred = zaOperacije + vrednost;
-            vrednost = novaVred;
-            rezultat = QString::number(novaVred);
-            zaIstoriju += QString::number(novaVred);
-        }
-        else if (oduZaJednako)
-        {
-            oduZaJednako = false;
-            jednako = false;
-            zaIstoriju += " = ";
-            double novaVred = zaOperacije - vrednost;
-            vrednost = novaVred;
-            rezultat = QString::number(novaVred);
-            zaIstoriju += QString::number(novaVred);
-        }
-        else if (mnoZaJednako)
-        {
-            mnoZaJednako = false;
-            jednako = false;
-            zaIstoriju += " = ";
-            double novaVred = zaOperacije * vrednost;
-            vrednost = novaVred;
-            rezultat = QString::number(novaVred);
-            zaIstoriju += QString::number(novaVred);
-        }
-        else if (delZaJednako)
-        {
-            delZaJednako = false;
-            jednako = false;
-            zaIstoriju += " = ";
-            if (vrednost != 0 || vrednost != 0.0)
+            if (sabiranje)
             {
-                double novaVred = zaOperacije / vrednost;
-                vrednost = novaVred;
-                rezultat = QString::number(novaVred);
-                zaIstoriju += QString::number(novaVred);
+                zaIstoriju += rezultat + " + ";
+                sabiranje = false;
+                sabZaJednako = true;
+            }
+            else if (oduzimanje)
+            {
+                zaIstoriju += rezultat + " - ";
+                oduzimanje = false;
+                oduZaJednako = true;
+            }
+            else if (mnozenje)
+            {
+                zaIstoriju += rezultat + " * ";
+                mnozenje = false;
+                mnoZaJednako = true;
             }
             else
             {
-                rezultat = "NAN";
-                zaIstoriju += rezultat;
+                zaIstoriju += rezultat + " / ";
+                deljenje = false;
+                delZaJednako = true;
+            }
+            rezultat = "";
+        }
+        else if (jednako)
+        {
+            jednako = false;
+            jednakoPoslednje = true;
+            zaIstoriju += QString::number(vrednost);
+            rezultat = QString::number(zaOperacije);
+            vrednost = zaOperacije;
+            zaIstoriju += " = " + rezultat;
+            //updatuje se i istorija
+            emit resultHistoryChanged(rezultat);
+        }
+        else if (korenovanje)
+        {
+           korenovanje = false;
+           double novaVred = qSqrt(zaOperacije);
+           //ukoliko je koren iz negativnog broja funkcija vraca NAN
+           vrednost = novaVred;
+           rezultat = QString::number(vrednost);
+           //ako je potrebno da se updatuje se i istorija
+           //zaIstoriju = "√" + QString::number(zaOperacije) + " = " + rezultat;
+           //emit resultHistoryChanged(rezultat);
+        }
+        else if (promenaZnaka)
+        {
+            promenaZnaka = false;
+            double novaVred = (-1)* vrednost;
+            vrednost = novaVred;
+            rezultat = QString::number(vrednost);
+            //ako je potrebno da se updatuje se i istorija
+            //zaIstoriju = "±" + QString::number(novaVred);
+            //emit resultHistoryChanged(rezultat);
+        }
+        else if (brisanje)
+        {
+            brisanje = false;
+            vrednost = 0.0;
+            rezultat = QString::number(vrednost);
+        }
+        else if (brisanjeCifre)
+        {
+            brisanjeCifre = false;
+            if (vrednost != 0)
+            {
+                QString novaVred = rezultat;
+                novaVred.chop(1);
+                if (novaVred.compare("") == 0 || novaVred.compare("-") == 0) //treba proveri da ne ostane minus
+                {
+                    vrednost = 0;
+                    rezultat = QString::number(vrednost);
+                }
+                else
+                {
+                    rezultat = novaVred;
+                    vrednost = novaVred.toDouble();
+                }
             }
         }
-        //updatuje se i istorija
-        emit resultHistoryChanged(rezultat);
-    }
-    else if (korenovanje)
-    {
-       korenovanje = false;
-       zaIstoriju = "√" + QString::number(vrednost);
-       double novaVred = qSqrt(vrednost);
-       //ukoliko je koren iz negativnog broja funkcija vraca NAN
-       vrednost = novaVred;
-       rezultat = QString::number(vrednost);
-       zaIstoriju += " = " + QString::number(novaVred);
-       //updatuje se i istorija
-       emit resultHistoryChanged(rezultat);
-    }
-    else if (promenaZnaka)
-    {
-        promenaZnaka = false;
-        double novaVred = (-1)* vrednost;
-        vrednost = novaVred;
-        rezultat = QString::number(vrednost);
-        zaIstoriju = "±" + QString::number(novaVred);
-        //updatuje se i istorija
-        emit resultHistoryChanged(rezultat);
-    }
-    else if (brisanje)
-    {
-        brisanje = false;
-        vrednost = 0.0;
-        rezultat = QString::number(vrednost);
-    }
-    else if (brisanjeCifre)
-    {
-        brisanjeCifre = false;
-        if (vrednost != 0.0 || vrednost != 0)
+        else //tacka
         {
-            QString novaVred = rezultat;
-            novaVred.chop(1);
-            if (novaVred.compare("") == 0)
+            tacka = false;
+            if (!rezultat.contains("."))
             {
-                vrednost = 0;
-                rezultat = QString::number(vrednost);
-            }
-            else
-            {
-                rezultat = novaVred;
+                QString novaVred = QString::number(vrednost)+".";
                 vrednost = novaVred.toDouble();
+                rezultat = novaVred;
             }
-        }
-        //ukoliko je vrednost = 0 nema koja cifra da se obrise
-    }
-    else //ako nije nista od prethodnog onda je tacka
-    {
-        tacka = false;
-        if (!rezultat.contains("."))
-        {
-            QString novaVred = QString::number(vrednost)+".";
-            vrednost = novaVred.toDouble();
-            rezultat = novaVred;
         }
     }
     emit resultChanged(rezultat);

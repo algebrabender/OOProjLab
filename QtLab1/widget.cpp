@@ -2,8 +2,7 @@
 #include "ui_widget.h"
 
 Widget::Widget(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Widget),
+    : QWidget(parent), ui(new Ui::Widget),
     calculatorLogic(new CalculatorLogic(this))
 {
     ui->setupUi(this);
@@ -51,4 +50,5 @@ void Widget::onResultChanged()
 void Widget::onResultHistoryChanged()
 {
     ui->istorija->insertPlainText(calculatorLogic->zaIstoriju + "\n");
+    calculatorLogic->zaIstoriju = ""; //da bi istorija bila "cista" za novi red
 }
