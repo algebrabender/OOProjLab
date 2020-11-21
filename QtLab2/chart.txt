@@ -1,0 +1,2 @@
+label1,90,#ffffff
+label2,180,#000000
