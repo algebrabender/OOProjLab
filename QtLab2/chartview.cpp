@@ -3,6 +3,7 @@
 
 ChartView::ChartView(QWidget *parent) : QWidget(parent)
 {
+    //zbog provere da li radi kako treba
     ref = new ChartDoc();
     ChartPoint* point = new ChartPoint();
     point->label = "dva";
