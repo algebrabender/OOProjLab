@@ -5,7 +5,6 @@
 #include <QFileDialog>
 #include "chartdoc.h"
 #include "chartview.h"
-#include <QGridLayout>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
