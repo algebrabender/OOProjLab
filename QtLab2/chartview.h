@@ -3,16 +3,9 @@
 
 #include <QWidget>
 #include <QMouseEvent>
+#include <QPainter>
 #include "chartdoc.h"
 #include "chartpointdialog.h"
-/*#include <QtCharts/QBarSet>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QChartView>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QValueAxis>*/
-#include <QPainter>
-
-//QT_CHARTS_USE_NAMESPACE
 
 class ChartView : public QWidget
 {
@@ -29,13 +22,6 @@ public slots:
 
 public:
     ChartDoc* ref; //not how it should be
-    /*QList<QBarSet *> stubovi;
-    QBarSeries *series;
-    QChart *chart;
-    QStringList labele;
-    QBarCategoryAxis *axisX;
-    QValueAxis *axisY;
-    QChartView *chartView;*/
 protected:
     void paintEvent(QPaintEvent*);
 };
