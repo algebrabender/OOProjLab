@@ -3,16 +3,17 @@
 
 #include <QWidget>
 #include <QMouseEvent>
-#include <QPainter>
 #include "chartdoc.h"
 #include "chartpointdialog.h"
+#include <QPainter>
+
 
 class ChartView : public QWidget
 {
     Q_OBJECT
 public:
     explicit ChartView(QWidget *parent = nullptr);
-
+    void referenciranje(ChartDoc* referenca);
     void mouseDoubleClickEvent(QMouseEvent* event);
 
 signals:
@@ -21,7 +22,8 @@ public slots:
     void onChartDataChanged();
 
 public:
-    ChartDoc* ref; //not how it should be
+    ChartDoc* ref;
+
 protected:
     void paintEvent(QPaintEvent*);
 };

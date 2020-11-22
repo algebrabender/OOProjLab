@@ -1,14 +1,9 @@
 #include "chartdoc.h"
 
-ChartDoc::ChartDoc(QObject *parent) : QObject(parent)
+ChartDoc::ChartDoc(QObject *parent) : QObject(parent),  podaci(QList<ChartPoint*> ())
 {
-    ChartPoint* point = new ChartPoint();
-    point->label = "jedan";
-    point->value = 80;
-    point->color.setNamedColor("#ffffff");
-    podaci.append(point);
-}
 
+}
 void ChartDoc::loadChartFromFile(QString file)
 {
     QFile f(file);
@@ -44,6 +39,6 @@ void ChartDoc::saveChartToFile(QString file)
         }
         f.close();
     }
-    else
+    else // doslo je do greske pri otvaranju fajl
         return;
 }

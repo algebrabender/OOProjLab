@@ -24,7 +24,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-public:
     ChartDoc* m_chartDoc;
 };
 #endif // MAINWINDOW_H

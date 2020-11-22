@@ -2,18 +2,12 @@
 
 ChartView::ChartView(QWidget *parent) : QWidget(parent)
 {
-    //zbog provere da li radi kako treba
-    ref = new ChartDoc();
-    ChartPoint* point = new ChartPoint();
-    point->label = "dva";
-    point->value = 60;
-    point->color.setNamedColor("#000000");
-    ref->podaci.append(point);
-    ChartPoint* point2 = new ChartPoint();
-    point2->label = "tri";
-    point2->value = 10;
-    point2->color.setNamedColor("#000fd0");
-    ref->podaci.append(point2);
+    //ref = new ChartDoc();
+}
+
+void ChartView::referenciranje(ChartDoc* referenca)
+{
+    ref = referenca;
 }
 
 void ChartView::paintEvent(QPaintEvent*)
@@ -35,7 +29,7 @@ void ChartView::paintEvent(QPaintEvent*)
     p.drawText(10, 215, "10");
     p.drawText(10, 235, "0");
     p.drawLine(45, 30, 45, 230); //y osa
-    p.drawLine(30, 230, 620, 230); //x osa
+    p.drawLine(30, 230, 1000, 230); //x osa
     for (int i = 0; i < ref->podaci.length(); i++)
     {
         p.setBrush(ref->podaci[i]->color);
@@ -51,13 +45,19 @@ void ChartView::mouseDoubleClickEvent(QMouseEvent* event)
         ChartPointDialog CPDialog;
         if (CPDialog.exec() == QDialog::Accepted) //ako je prtisnuto OK potrebno je izmeniti podatke
         {
-            ChartPoint* stub = new ChartPoint();
-            stub->label = CPDialog.getLabel();
-            stub->value = CPDialog.getValue();
-            stub->color = CPDialog.getColor();
-            ref->podaci.append(stub);
+            int x = event->x();
+            //int y = event->y();
+            for (int i = 0; i < ref->podaci.length(); i++)
+            {
+                if (x >= 45+100*i && x <= 115+100*i)
+                {
+                    ref->podaci[i]->label = CPDialog.getLabel();
+                    ref->podaci[i]->value = CPDialog.getValue();
+                    ref->podaci[i]->color = CPDialog.getColor();
+                }
+            }
             onChartDataChanged();
-            //emit ref->chartDataChanged();
+            emit ref->chartDataChanged();
         }
     }
 }
