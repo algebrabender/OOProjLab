@@ -1,5 +1,4 @@
 #include "chartview.h"
-#include <QMessageBox>
 
 ChartView::ChartView(QWidget *parent) : QWidget(parent)
 {
