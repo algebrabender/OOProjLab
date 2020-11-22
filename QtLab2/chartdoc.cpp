@@ -3,8 +3,8 @@
 ChartDoc::ChartDoc(QObject *parent) : QObject(parent)
 {
     ChartPoint* point = new ChartPoint();
-    point->label = "";
-    point->value = 0;
+    point->label = "jedan";
+    point->value = 80;
     point->color.setNamedColor("#ffffff");
     podaci.append(point);
 }

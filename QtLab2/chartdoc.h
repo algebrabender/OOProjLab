@@ -12,7 +12,7 @@ class ChartDoc : public QObject
 public:
     explicit ChartDoc(QObject *parent = nullptr);
 
-    QList<ChartPoint*> podaci; //idk kako struktura
+    QList<ChartPoint*> podaci;
     void loadChartFromFile(QString file);
     void saveChartToFile(QString file);
 
