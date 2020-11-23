@@ -1,6 +1,6 @@
 #include "chartdoc.h"
 
-ChartDoc::ChartDoc(QObject *parent) : QObject(parent),  podaci(QList<ChartPoint*> ())
+ChartDoc::ChartDoc(QObject *parent) : QObject(parent),  m_points(QList<ChartPoint*> ())
 {
 
 }
@@ -18,7 +18,7 @@ void ChartDoc::loadChartFromFile(QString file)
             stub->label = parts[0];
             stub->value = parts[1].toFloat();
             stub->color.setNamedColor(parts[2]);
-            podaci.append(stub);
+            m_points.append(stub);
         }
         f.close();
         emit chartDataChanged();
@@ -33,9 +33,9 @@ void ChartDoc::saveChartToFile(QString file)
     if (f.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream uFajl(&f);
-        for (int i = 0; i < podaci.length(); i++)
+        for (int i = 0; i < m_points.length(); i++)
         {
-            uFajl << podaci[i]->label << "," << podaci[i]->value << "," << podaci[i]->color.name() << "\n";
+            uFajl << m_points[i]->label << "," << m_points[i]->value << "," << m_points[i]->color.name() << "\n";
         }
         f.close();
     }

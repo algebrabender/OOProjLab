@@ -26,6 +26,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent*);
+    void drawSingleBar(int w, int h, QColor color);
 };
 
 #endif // CHARTVIEW_H
