@@ -31,15 +31,44 @@ QImage SkiGame::draw()
     if (santa->trenutnoStanje == 1)
     {
         santa->trenutnoStanje = 0;
-        return santa->santaright1;
+        if (santa->animacija == 1)
+        {
+            santa->animacija = 2;
+            return santa->santaright1;
+        }
+        else
+        {
+            santa->animacija = 1;
+            return santa->santaright2;
+        }
     }
     else if (santa->trenutnoStanje == -1)
     {
         santa->trenutnoStanje = 0;
-        return santa->santaleft1;
+        if (santa->animacija == 1)
+        {
+            santa->animacija = 2;
+            return santa->santaleft1;
+        }
+        else
+        {
+            santa->animacija = 1;
+            return santa->santaleft2;
+        }
     }
     else
-        return santa->santa1;
+    {
+        if (santa->animacija == 1)
+        {
+            santa->animacija = 2;
+            return santa->santa1;
+        }
+        else
+        {
+            santa->animacija = 1;
+            return santa->santa2;
+        }
+    }
 }
 
 void SkiGame::tick()

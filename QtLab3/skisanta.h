@@ -20,6 +20,7 @@ public:
     int w;
     int h;
     int trenutnoStanje; //-1-levo, 0-levo, 1-desno
+    int animacija;
 };
 
 #endif // SKISANTA_H
