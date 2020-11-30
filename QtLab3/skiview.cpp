@@ -5,7 +5,7 @@ SkiView::SkiView(QWidget *parent) : QWidget(parent)
     setFocusPolicy(Qt::StrongFocus);
     game = new SkiGame();
     timer = new QTimer(this);
-    timer->start(1000);
+    timer->start(750);
     connect(timer, SIGNAL(timeout()), this, SLOT(tick()));
 }
 

@@ -75,7 +75,7 @@ void SkiGame::tick()
 {
     for (int i = 0; i < prepreke.length(); i++)
     {
-        prepreke[i]->y -= 30;
+        prepreke[i]->y -= 40;
         if (prepreke[i]->y < 0 - prepreke[i]->h)
         {
             prepreke[i]->y = 400 + qrand() % 400;

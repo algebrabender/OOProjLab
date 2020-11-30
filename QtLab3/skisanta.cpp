@@ -12,7 +12,7 @@ SkiSanta::SkiSanta(QObject *parent) : QObject(parent)
     trenutnoStanje = 0;
     w = santa1.width();
     h = santa1.height();
-    x = 0;
+    x = 15;
     y = 150;
 
     animacija = 1;
