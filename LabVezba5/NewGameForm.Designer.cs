@@ -184,6 +184,7 @@ namespace LabVezba5
             this.tbxPoints.Name = "tbxPoints";
             this.tbxPoints.Size = new System.Drawing.Size(255, 20);
             this.tbxPoints.TabIndex = 6;
+            this.tbxPoints.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPoints_KeyPress);
             // 
             // NewGameForm
             // 
