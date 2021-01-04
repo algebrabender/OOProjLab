@@ -49,18 +49,30 @@
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\StandardController.cs" />
     <Compile Include="Controllers\TexasController.cs" />
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\Deck.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GameForm.Designer.cs">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\Deck.cs" />
+    <Compile Include="NewGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewGameForm.Designer.cs">
+      <DependentUpon>NewGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\IModel.cs" />
     <Compile Include="View\IView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewGameForm.resx">
+      <DependentUpon>NewGameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -15,15 +15,28 @@ namespace LabVezba5.Models
     public class Deck : IModel
     {
         private List<Card> deck;
+        private Type deckType;
 
         public List<Card> GetDeck
         {
             get { return this.deck; }
         }
 
+        public Type DeckType
+        {
+            get { return this.deckType; }
+            set { this.deckType = value; }
+        }
+
         public Deck()
         {
             this.deck = new List<Card>();
+        }
+
+        public Deck(int type)
+            :base()
+        {
+            this.deckType = (Type)type;
         }
 
         public void AddCards(int rangeFrom, int rangeTo)
