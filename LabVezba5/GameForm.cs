@@ -53,6 +53,7 @@ namespace LabVezba5
                 cbxReplace.Enabled = false;
                 btnReplace.Enabled = false;
             }
+
             lblPoints.Text = startPoints.ToString();
         }
 

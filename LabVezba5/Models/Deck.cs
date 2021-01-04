@@ -34,7 +34,7 @@ namespace LabVezba5.Models
         }
 
         public Deck(int type)
-            :base()
+            :this()
         {
             this.deckType = (Type)type;
         }
@@ -52,6 +52,18 @@ namespace LabVezba5.Models
                 card = new Card(Suits.HEARTS, i.ToString());
                 deck.Add(card);
                 card = new Card(Suits.SPADES, i.ToString());
+                deck.Add(card);
+            }
+
+            if(this.deckType == Type.FRENCH)
+            {
+                card = new Card(Suits.CLUBS, "1");
+                deck.Add(card);
+                card = new Card(Suits.DIAMONDS, "1");
+                deck.Add(card);
+                card = new Card(Suits.HEARTS, "1");
+                deck.Add(card);
+                card = new Card(Suits.SPADES, "1");
                 deck.Add(card);
             }
         }
