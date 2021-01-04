@@ -59,11 +59,15 @@ namespace LabVezba5
                 if (rbnFrenchDeck.Checked)
                     deck = 1;
 
-                GameForm game = new GameForm(type, deck);
+                var game = new GameForm(type, deck, Int32.Parse(tbxPoints.Text));
 
                 this.Hide();
 
-                game.ShowDialog();
+                DialogResult dlg = game.ShowDialog();
+
+                //da bi se zatvorilo kad zatvorimo main game
+                if (dlg == System.Windows.Forms.DialogResult.OK)
+                    this.Close();
             }
         }
 

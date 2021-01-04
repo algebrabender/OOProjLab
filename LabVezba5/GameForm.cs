@@ -34,8 +34,8 @@ namespace LabVezba5
             InitializeComponent();
         }
 
-        public GameForm(int type, int deck)
-            :base()
+        public GameForm(int type, int deck, int startPoints)
+            : this()
         {
             if (deck == 0)
                 this.deck = new Deck(0);
@@ -43,16 +43,22 @@ namespace LabVezba5
                 this.deck = new Deck(1);
 
             if (type == 0)
+            {
                 this.controller = new StandardController(this.deck, this);
+                btnSeeCC.Enabled = false;
+            }
             else
+            {
                 this.controller = new TexasController(this.deck, this);
+                cbxReplace.Enabled = false;
+                btnReplace.Enabled = false;
+            }
+            lblPoints.Text = startPoints.ToString();
         }
 
-        /*private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            NewGameForm newGame = new NewGameForm();
-
-            newGame.ShowDialog();
-        }*/
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
     }
 }
