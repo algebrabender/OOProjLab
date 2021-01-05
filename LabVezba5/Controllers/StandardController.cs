@@ -12,10 +12,17 @@ namespace LabVezba5.Controllers
 {
     class StandardController : IController
     {
+        #region Attributes
+
         private IModel deck;
         private IView view;
         private List<Card> currentCards;
         private int currentPoints;
+        private bool pointsCalculated;
+
+        #endregion
+
+        #region Constructor
 
         public StandardController(IModel deck, IView view, int startingPoints)
         {
@@ -29,6 +36,10 @@ namespace LabVezba5.Controllers
             Start();
         }
 
+        #endregion
+
+        #region Interface Implementation
+
         public void Start()
         {
             this.deck.NewDeck();
@@ -37,7 +48,8 @@ namespace LabVezba5.Controllers
 
         public void GameOver()
         {
-            
+            if (!this.pointsCalculated)
+                CalculatePoints();
         }
 
         public bool Draw()
@@ -48,8 +60,14 @@ namespace LabVezba5.Controllers
                 return false;
 
             this.currentPoints -= this.view.GetBetAmount();
+
+            if (currentPoints == 0)
+                return false;
+
             this.view.SetPoints(currentPoints);
             SetPictures();
+
+            this.pointsCalculated = false;
 
             return true;
         }
@@ -85,11 +103,21 @@ namespace LabVezba5.Controllers
             SetPictures();
 
             CalculatePoints();
+            //proveriti da li funkcionise kako treba/da li treba neki message
+            this.pointsCalculated = true;
         }
 
-        public int CalculatePoints()
+        public int GetPoints()
         {
-            return 0;
+            return this.currentPoints;
+        }
+
+        #endregion
+
+        private void CalculatePoints()
+        {
+            //tabela
+            this.currentPoints += this.view.GetBetAmount() * 100;
         }
     }
 }

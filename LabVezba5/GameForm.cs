@@ -102,12 +102,27 @@ namespace LabVezba5
 
             if (!controller.Draw())
             {
-                MessageBox.Show("No more cards for dealing", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (this.controller.GetPoints() == 0)
+                {
+                    MessageBox.Show("No more points. Game has ended", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No more cards for dealing", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnDeal.Enabled = false;
+                    btnReplace.Enabled = false;
+                    cbxReplace.Enabled = false;
+                }
             }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            this.controller.GameOver();
+
+            lblPoints.Text = this.controller.GetPoints().ToString();
+
             MessageBox.Show("The Game has ended\nFinal score: " + lblPoints.Text, "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             this.Close();
         }
@@ -121,6 +136,7 @@ namespace LabVezba5
             }
 
             this.controller.ReplaceToggle(cbxReplace.SelectedIndex);
+            cbxReplace.SelectedIndex = -1;
         }
 
         private void btnSeeCC_Click(object sender, EventArgs e)

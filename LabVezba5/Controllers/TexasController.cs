@@ -12,11 +12,17 @@ namespace LabVezba5.Controllers
 {
     class TexasController : IController
     {
+        #region Attributes
+
         private IModel deck;
         private IView view;
         private List<Card> currentCards;
         private int currentPoints;
         private int count;
+
+        #endregion
+
+        #region Constructor
 
         public TexasController(IModel deck, IView view, int startingPoints)
         {
@@ -30,6 +36,10 @@ namespace LabVezba5.Controllers
             Start();
         }
 
+        #endregion
+
+        #region Interface Implementation
+
         public void Start()
         {
             this.deck.NewDeck();
@@ -38,7 +48,16 @@ namespace LabVezba5.Controllers
 
         public void GameOver()
         {
+            CalculatePoints();
 
+            if (count == 0)
+                this.currentPoints *= 5;
+            else if (count == 1)
+                this.currentPoints *= 2;
+            else if (count == 2)
+                this.currentPoints -= this.view.GetBetAmount();
+            else
+                this.currentPoints -= this.view.GetBetAmount() * 2;
         }
 
         public bool Draw()
@@ -81,9 +100,20 @@ namespace LabVezba5.Controllers
             if (list[count+1].Image == images[5])
             {
                 list[count + 1].Image = images[count + 1];
-                return;
             }
+        }
 
-        }  
+        public int GetPoints()
+        {
+            return this.currentPoints;
+        }
+
+        #endregion
+
+        private void CalculatePoints()
+        {
+            //tabela
+            this.currentPoints = this.view.GetBetAmount() * 100;
+        }
     }
 }

@@ -15,5 +15,6 @@ namespace LabVezba5.Controllers
         bool Draw();
         void SetPictures();
         void ReplaceToggle(int numOfCards);
+        int GetPoints();
     }
 }
