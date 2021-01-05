@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace LabVezba5.Models
 {
@@ -14,8 +15,14 @@ namespace LabVezba5.Models
 
     public class Deck : IModel
     {
+        #region Attributes
+
         private List<Card> deck;
         private Type deckType;
+
+        #endregion
+
+        #region Properties
 
         public List<Card> GetDeck
         {
@@ -28,6 +35,10 @@ namespace LabVezba5.Models
             set { this.deckType = value; }
         }
 
+        #endregion
+
+        #region Constructors
+
         public Deck()
         {
             this.deck = new List<Card>();
@@ -38,6 +49,10 @@ namespace LabVezba5.Models
         {
             this.deckType = (Type)type;
         }
+
+        #endregion
+
+        #region Methodes
 
         public void AddCards(int rangeFrom, int rangeTo)
         {
@@ -78,23 +93,34 @@ namespace LabVezba5.Models
 
         public void ShuffleDeck(List<Card> currentDeck)
         {
-            //todo
+            Random rand = new Random();
+
+            int i = currentDeck.Count;
+            while (i > 1)
+            {
+                i--;
+                int j = rand.Next(i + 1);
+                Card temp = currentDeck[j];
+                currentDeck[j] = currentDeck[i];
+                currentDeck[i] = temp;
+            }
         }
         
-        public void NewDeck(Type type)
+        public void NewDeck()
         {
-            this.deck.Clear();
-
-            FillDeck(type);
+            FillDeck(this.deckType);
 
             ShuffleDeck(this.deck);
         }
 
-        public List<Card> DrawCards(int numbOfCards)
+        public List<Card> DrawCards(int numOfCards)
         {
             List<Card> drawnCards = new List<Card>();
 
-            for (int i = 0; i < numbOfCards; i++)
+            if (this.deck.Count <= numOfCards)
+                return null;
+
+            for (int i = 0; i < numOfCards; i++)
             {
                 int index = deck.Count - 1;
                 drawnCards.Add(deck[index]);
@@ -103,5 +129,19 @@ namespace LabVezba5.Models
 
             return drawnCards; 
         }
+
+        public List<Image> GetImages(List<Card> currentDeck)
+        {
+            List<Image> list = new List<Image>();
+
+            foreach (Card c in currentDeck)
+                list.Add(c.Img);
+
+            list.Add(currentDeck[0].CoverImg);
+
+            return list;
+        }
+
+        #endregion
     }
 }

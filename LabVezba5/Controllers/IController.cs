@@ -12,8 +12,7 @@ namespace LabVezba5.Controllers
     {
         void Start();
         void GameOver();
-        void NewGame();
-        void Draw();
-        //remove ulog?
+        bool Draw();
+        void SetPictures();
     }
 }

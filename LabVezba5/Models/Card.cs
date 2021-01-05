@@ -24,6 +24,7 @@ namespace LabVezba5.Models
         private String cardNumber;
         private int cardValue;
         private Image img;
+        private Image coverImg;
 
         #endregion
 
@@ -47,6 +48,11 @@ namespace LabVezba5.Models
         public Image Img
         {
             get { return this.img; }
+        }
+
+        public Image CoverImg
+        {
+            get { return this.coverImg; }
         }
 
         #endregion
@@ -105,13 +111,15 @@ namespace LabVezba5.Models
 
             //trazi fajl koji odgovara imenu karte 
             //sve karte su u formatu VrednostOznaka
-            foreach (string cardImg in cardImgs)
+            foreach (String cardImg in cardImgs)
             {
-                if (Path.GetFileNameWithoutExtension(cardImg) == imgName)
-                {
+                String woExtension = Path.GetFileNameWithoutExtension(cardImg);
+
+                if (woExtension == imgName)
                     this.img = Image.FromFile(cardImg);
-                    break;
-                }
+
+                if (woExtension == "yellow_back")
+                    this.coverImg = Image.FromFile(cardImg);
             }
         }
 
