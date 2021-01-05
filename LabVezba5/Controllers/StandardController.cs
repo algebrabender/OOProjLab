@@ -62,5 +62,34 @@ namespace LabVezba5.Controllers
             for (int i = 0; i < 5; i++)
                 list[i].Image = images[i]; 
         }
+
+        public void ReplaceToggle(int numOfCards)
+        {
+            Random rand = new Random();
+
+            List<Card> currentDeck = this.deck.GetDeck();
+            
+            this.deck.ShuffleDeck(currentDeck);
+
+            Card forSwapping;
+
+            for (int i = 0; i < numOfCards; i++)
+            {
+                forSwapping = currentDeck[rand.Next(0, currentDeck.Count - 1)];
+                currentDeck.Remove(forSwapping);
+                int index = rand.Next(0, 5);
+                currentDeck.Add(currentCards[index]);
+                this.currentCards[index] = forSwapping;
+            }
+
+            SetPictures();
+
+            CalculatePoints();
+        }
+
+        public int CalculatePoints()
+        {
+            return 0;
+        }
     }
 }

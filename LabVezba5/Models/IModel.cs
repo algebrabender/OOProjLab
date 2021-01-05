@@ -13,5 +13,6 @@ namespace LabVezba5.Models
         void NewDeck();
         List<Card> DrawCards(int numOfCards);
         List<Image> GetImages(List<Card> currentCards);
+        List<Card> GetDeck();
     }
 }

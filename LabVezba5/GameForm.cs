@@ -41,12 +41,14 @@ namespace LabVezba5
             {
                 this.controller = new StandardController(this.deck, this, startPoints);
                 btnSeeCC.Enabled = false;
+                lblText.Text = "You can either Replace cards or Deal new set of cards\nIf you want to finish game click on Stop";
             }
             else
             {
                 this.controller = new TexasController(this.deck, this, startPoints);
                 cbxReplace.Enabled = false;
                 btnReplace.Enabled = false;
+                lblText.Text = "You can either See CC (1 by 1) or Deal new set of cards\nIf you want to finish game click on Stop";
             }
         }
 
@@ -110,6 +112,22 @@ namespace LabVezba5
             this.Close();
         }
 
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+            if (cbxReplace.SelectedIndex == -1)
+            {
+                MessageBox.Show("Number must be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.controller.ReplaceToggle(cbxReplace.SelectedIndex);
+        }
+
+        private void btnSeeCC_Click(object sender, EventArgs e)
+        {
+            this.controller.ReplaceToggle(1);
+        }
+
         private void tbxBetAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
@@ -120,7 +138,5 @@ namespace LabVezba5
         }
 
         #endregion
-
-        
     }
 }

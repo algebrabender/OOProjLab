@@ -16,6 +16,7 @@ namespace LabVezba5.Controllers
         private IView view;
         private List<Card> currentCards;
         private int currentPoints;
+        private int count;
 
         public TexasController(IModel deck, IView view, int startingPoints)
         {
@@ -42,6 +43,8 @@ namespace LabVezba5.Controllers
 
         public bool Draw()
         {
+            this.count = 0;
+
             this.currentCards = this.deck.DrawCards(5);
 
             if (currentCards == null)
@@ -65,5 +68,22 @@ namespace LabVezba5.Controllers
             for (int i = 2; i < 5; i++)
                 list[i].Image = images[5];
         }
+
+        public void ReplaceToggle(int numOfCards)
+        {
+            count++;
+            if (count > 3)
+                return;
+
+            List<PictureBox> list = this.view.GetPictureBoxes();
+            List<Image> images = this.deck.GetImages(currentCards);
+
+            if (list[count+1].Image == images[5])
+            {
+                list[count + 1].Image = images[count + 1];
+                return;
+            }
+
+        }  
     }
 }

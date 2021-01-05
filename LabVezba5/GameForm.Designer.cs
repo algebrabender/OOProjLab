@@ -38,19 +38,20 @@ namespace LabVezba5
             this.btnSeeCC = new System.Windows.Forms.Button();
             this.cbxReplace = new System.Windows.Forms.ComboBox();
             this.lblReplace = new System.Windows.Forms.Label();
-            this.pbxFirst = new System.Windows.Forms.PictureBox();
-            this.pbxSecond = new System.Windows.Forms.PictureBox();
-            this.pbxThird = new System.Windows.Forms.PictureBox();
-            this.pbxFourth = new System.Windows.Forms.PictureBox();
-            this.pbxFifth = new System.Windows.Forms.PictureBox();
             this.tbxBetAmount = new System.Windows.Forms.TextBox();
             this.lblBetAmount = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFirst)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxSecond)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxThird)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFourth)).BeginInit();
+            this.pbxFifth = new System.Windows.Forms.PictureBox();
+            this.pbxFourth = new System.Windows.Forms.PictureBox();
+            this.pbxThird = new System.Windows.Forms.PictureBox();
+            this.pbxSecond = new System.Windows.Forms.PictureBox();
+            this.pbxFirst = new System.Windows.Forms.PictureBox();
+            this.lblText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFifth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFourth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxThird)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxSecond)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFirst)).BeginInit();
             this.SuspendLayout();
             // 
             // lblStartPoints
@@ -93,6 +94,7 @@ namespace LabVezba5
             this.btnReplace.TabIndex = 3;
             this.btnReplace.Text = "Replace";
             this.btnReplace.UseVisualStyleBackColor = true;
+            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
             // 
             // btnStop
             // 
@@ -114,6 +116,7 @@ namespace LabVezba5
             this.btnSeeCC.TabIndex = 5;
             this.btnSeeCC.Text = "See CC";
             this.btnSeeCC.UseVisualStyleBackColor = true;
+            this.btnSeeCC.Click += new System.EventHandler(this.btnSeeCC_Click);
             // 
             // cbxReplace
             // 
@@ -139,46 +142,6 @@ namespace LabVezba5
             this.lblReplace.Size = new System.Drawing.Size(116, 17);
             this.lblReplace.TabIndex = 7;
             this.lblReplace.Text = "Cards to replace:";
-            // 
-            // pbxFirst
-            // 
-            this.pbxFirst.Location = new System.Drawing.Point(15, 92);
-            this.pbxFirst.Name = "pbxFirst";
-            this.pbxFirst.Size = new System.Drawing.Size(65, 100);
-            this.pbxFirst.TabIndex = 8;
-            this.pbxFirst.TabStop = false;
-            // 
-            // pbxSecond
-            // 
-            this.pbxSecond.Location = new System.Drawing.Point(104, 92);
-            this.pbxSecond.Name = "pbxSecond";
-            this.pbxSecond.Size = new System.Drawing.Size(65, 100);
-            this.pbxSecond.TabIndex = 9;
-            this.pbxSecond.TabStop = false;
-            // 
-            // pbxThird
-            // 
-            this.pbxThird.Location = new System.Drawing.Point(192, 92);
-            this.pbxThird.Name = "pbxThird";
-            this.pbxThird.Size = new System.Drawing.Size(65, 100);
-            this.pbxThird.TabIndex = 10;
-            this.pbxThird.TabStop = false;
-            // 
-            // pbxFourth
-            // 
-            this.pbxFourth.Location = new System.Drawing.Point(281, 92);
-            this.pbxFourth.Name = "pbxFourth";
-            this.pbxFourth.Size = new System.Drawing.Size(65, 100);
-            this.pbxFourth.TabIndex = 11;
-            this.pbxFourth.TabStop = false;
-            // 
-            // pbxFifth
-            // 
-            this.pbxFifth.Location = new System.Drawing.Point(366, 92);
-            this.pbxFifth.Name = "pbxFifth";
-            this.pbxFifth.Size = new System.Drawing.Size(65, 100);
-            this.pbxFifth.TabIndex = 12;
-            this.pbxFifth.TabStop = false;
             // 
             // tbxBetAmount
             // 
@@ -208,11 +171,61 @@ namespace LabVezba5
             this.lblTitle.TabIndex = 15;
             this.lblTitle.Text = "Game of Poker";
             // 
+            // pbxFifth
+            // 
+            this.pbxFifth.Location = new System.Drawing.Point(366, 92);
+            this.pbxFifth.Name = "pbxFifth";
+            this.pbxFifth.Size = new System.Drawing.Size(65, 100);
+            this.pbxFifth.TabIndex = 12;
+            this.pbxFifth.TabStop = false;
+            // 
+            // pbxFourth
+            // 
+            this.pbxFourth.Location = new System.Drawing.Point(281, 92);
+            this.pbxFourth.Name = "pbxFourth";
+            this.pbxFourth.Size = new System.Drawing.Size(65, 100);
+            this.pbxFourth.TabIndex = 11;
+            this.pbxFourth.TabStop = false;
+            // 
+            // pbxThird
+            // 
+            this.pbxThird.Location = new System.Drawing.Point(192, 92);
+            this.pbxThird.Name = "pbxThird";
+            this.pbxThird.Size = new System.Drawing.Size(65, 100);
+            this.pbxThird.TabIndex = 10;
+            this.pbxThird.TabStop = false;
+            // 
+            // pbxSecond
+            // 
+            this.pbxSecond.Location = new System.Drawing.Point(104, 92);
+            this.pbxSecond.Name = "pbxSecond";
+            this.pbxSecond.Size = new System.Drawing.Size(65, 100);
+            this.pbxSecond.TabIndex = 9;
+            this.pbxSecond.TabStop = false;
+            // 
+            // pbxFirst
+            // 
+            this.pbxFirst.Location = new System.Drawing.Point(15, 92);
+            this.pbxFirst.Name = "pbxFirst";
+            this.pbxFirst.Size = new System.Drawing.Size(65, 100);
+            this.pbxFirst.TabIndex = 8;
+            this.pbxFirst.TabStop = false;
+            // 
+            // lblText
+            // 
+            this.lblText.AutoSize = true;
+            this.lblText.Location = new System.Drawing.Point(175, 12);
+            this.lblText.Name = "lblText";
+            this.lblText.Size = new System.Drawing.Size(38, 13);
+            this.lblText.TabIndex = 16;
+            this.lblText.Text = "lblText";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 261);
+            this.Controls.Add(this.lblText);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.tbxBetAmount);
             this.Controls.Add(this.lblBetAmount);
@@ -236,11 +249,11 @@ namespace LabVezba5
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game of Poker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFirst)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxSecond)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxThird)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFourth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFifth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFourth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxThird)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxSecond)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFirst)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +277,6 @@ namespace LabVezba5
         private System.Windows.Forms.TextBox tbxBetAmount;
         private System.Windows.Forms.Label lblBetAmount;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblText;
     }
 }

@@ -22,21 +22,6 @@ namespace LabVezba5.Models
 
         #endregion
 
-        #region Properties
-
-        public List<Card> GetDeck
-        {
-            get { return this.deck; }
-        }
-
-        public Type DeckType
-        {
-            get { return this.deckType; }
-            set { this.deckType = value; }
-        }
-
-        #endregion
-
         #region Constructors
 
         public Deck()
@@ -99,7 +84,7 @@ namespace LabVezba5.Models
             while (i > 1)
             {
                 i--;
-                int j = rand.Next(i + 1);
+                int j = rand.Next(0, i + 1);
                 Card temp = currentDeck[j];
                 currentDeck[j] = currentDeck[i];
                 currentDeck[i] = temp;
@@ -140,6 +125,11 @@ namespace LabVezba5.Models
             list.Add(currentDeck[0].CoverImg);
 
             return list;
+        }
+
+        public List<Card> GetDeck()
+        {
+            return this.deck;
         }
 
         #endregion
