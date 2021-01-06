@@ -24,9 +24,9 @@ namespace LabVezba5.Controllers
 
         #region Constructor
 
-        public StandardController(IModel deck, IView view, int startingPoints)
+        public StandardController(IView view, int startingPoints)
         {
-            this.deck = deck;
+            this.deck = new Deck();
             this.view = view;
             this.view.AddListener(this);
 

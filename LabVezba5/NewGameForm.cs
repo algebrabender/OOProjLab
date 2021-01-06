@@ -17,6 +17,8 @@ namespace LabVezba5
             InitializeComponent();
         }
 
+        #region Methodes
+
         private bool Validation()
         {
             if (tbxPoints.Text == "")
@@ -25,41 +27,24 @@ namespace LabVezba5
                 return false;
             }
 
-            if (!rbnStandard.Checked && !rbnTexas.Checked)
+            if (tbxBetAmount.Text == "")
             {
-                MessageBox.Show("Type not chosen", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (!rbnStandardDeck.Checked && !rbnFrenchDeck.Checked)
-            {
-                MessageBox.Show("Deck type not chosen", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Bet amount not entered", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             return true;
         }
 
+        #endregion
+
+        #region Event Handlers
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             if(Validation())
             {
-                int type = -1;
-                int deck = -1;
-
-                if (rbnStandard.Checked)
-                    type = 0;
-
-                if (rbnTexas.Checked)
-                    type = 1;
-
-                if (rbnStandardDeck.Checked)
-                    deck = 0;
-
-                if (rbnFrenchDeck.Checked)
-                    deck = 1;
-
-                var game = new GameForm(type, deck, Int32.Parse(tbxPoints.Text));
+                var game = new GameForm(Int32.Parse(tbxPoints.Text), Int32.Parse(tbxBetAmount.Text));
 
                 this.Hide();
 
@@ -84,5 +69,16 @@ namespace LabVezba5
                 MessageBox.Show("Only numbers allowed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void tbxBetAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Only numbers allowed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        #endregion
     }
 }

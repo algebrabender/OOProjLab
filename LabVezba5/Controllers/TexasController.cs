@@ -24,9 +24,9 @@ namespace LabVezba5.Controllers
 
         #region Constructor
 
-        public TexasController(IModel deck, IView view, int startingPoints)
+        public TexasController(IView view, int startingPoints)
         {
-            this.deck = deck;
+            this.deck = new Deck();
             this.view = view;
             this.view.AddListener(this);
 

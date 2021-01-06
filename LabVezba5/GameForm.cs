@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LabVezba5.View;
 using LabVezba5.Controllers;
-using LabVezba5.Models;
 
 namespace LabVezba5
 {
@@ -18,7 +17,6 @@ namespace LabVezba5
         #region Attributes
 
         private IController controller;
-        private Deck deck;
 
         #endregion
 
@@ -29,32 +27,17 @@ namespace LabVezba5
             InitializeComponent();
         }
 
-        public GameForm(int type, int deck, int startPoints)
+        public GameForm(int startPoints, int betAmount)
             : this()
         {
-            if (deck == 0)
-                this.deck = new Deck(0);
-            else
-                this.deck = new Deck(1);
-
-            if (type == 0)
-            {
-                this.controller = new StandardController(this.deck, this, startPoints);
-                btnSeeCC.Enabled = false;
-                lblText.Text = "You can either Replace cards or Deal new set of cards\nIf you want to finish game click on Stop";
-            }
-            else
-            {
-                this.controller = new TexasController(this.deck, this, startPoints);
-                cbxReplace.Enabled = false;
-                btnReplace.Enabled = false;
-                lblText.Text = "You can either See CC (1 by 1) or Deal new set of cards\nIf you want to finish game click on Stop";
-            }
+            this.controller = new StandardController(this, startPoints);
+            tbxBetAmount.Text = betAmount.ToString();
+            lblText.Text = "You can either Replace cards or Deal new set of cards.\nIf you want to finish game click on Stop";
         }
 
         #endregion
 
-        #region Interface Implemnetation 
+        #region Interface Implementation 
 
         public void AddListener(IController controller)
         {
@@ -137,11 +120,6 @@ namespace LabVezba5
 
             this.controller.ReplaceToggle(cbxReplace.SelectedIndex);
             cbxReplace.SelectedIndex = -1;
-        }
-
-        private void btnSeeCC_Click(object sender, EventArgs e)
-        {
-            this.controller.ReplaceToggle(1);
         }
 
         private void tbxBetAmount_KeyPress(object sender, KeyPressEventArgs e)

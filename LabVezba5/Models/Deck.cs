@@ -7,32 +7,25 @@ using System.Drawing;
 
 namespace LabVezba5.Models
 {
-    public enum Type 
+    /*public enum Type 
     {
         STANDARD = 0,
         FRENCH
-    }
+    }*/
 
     public class Deck : IModel
     {
         #region Attributes
 
         private List<Card> deck;
-        private Type deckType;
 
         #endregion
 
-        #region Constructors
+        #region Constructor
 
         public Deck()
         {
             this.deck = new List<Card>();
-        }
-
-        public Deck(int type)
-            :this()
-        {
-            this.deckType = (Type)type;
         }
 
         #endregion
@@ -54,26 +47,11 @@ namespace LabVezba5.Models
                 card = new Card(Suits.SPADES, i.ToString());
                 deck.Add(card);
             }
-
-            if(this.deckType == Type.FRENCH)
-            {
-                card = new Card(Suits.CLUBS, "1");
-                deck.Add(card);
-                card = new Card(Suits.DIAMONDS, "1");
-                deck.Add(card);
-                card = new Card(Suits.HEARTS, "1");
-                deck.Add(card);
-                card = new Card(Suits.SPADES, "1");
-                deck.Add(card);
-            }
         }
 
-        public void FillDeck(Type type)
+        public void FillDeck()
         {
-            if (type == 0)
-                AddCards(1, 14);
-            else
-                AddCards(7, 14);
+            AddCards(1, 14);
         }
 
         public void ShuffleDeck(List<Card> currentDeck)
@@ -93,7 +71,7 @@ namespace LabVezba5.Models
         
         public void NewDeck()
         {
-            FillDeck(this.deckType);
+            FillDeck();
 
             ShuffleDeck(this.deck);
         }

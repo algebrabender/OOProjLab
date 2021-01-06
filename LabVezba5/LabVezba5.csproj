@@ -57,13 +57,13 @@
     </Compile>
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Deck.cs" />
+    <Compile Include="Models\IModel.cs" />
     <Compile Include="NewGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewGameForm.Designer.cs">
       <DependentUpon>NewGameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\IModel.cs" />
     <Compile Include="View\IView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

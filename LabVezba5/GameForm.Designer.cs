@@ -35,7 +35,6 @@ namespace LabVezba5
             this.btnDeal = new System.Windows.Forms.Button();
             this.btnReplace = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.btnSeeCC = new System.Windows.Forms.Button();
             this.cbxReplace = new System.Windows.Forms.ComboBox();
             this.lblReplace = new System.Windows.Forms.Label();
             this.tbxBetAmount = new System.Windows.Forms.TextBox();
@@ -77,7 +76,7 @@ namespace LabVezba5
             // btnDeal
             // 
             this.btnDeal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeal.Location = new System.Drawing.Point(459, 12);
+            this.btnDeal.Location = new System.Drawing.Point(459, 57);
             this.btnDeal.Name = "btnDeal";
             this.btnDeal.Size = new System.Drawing.Size(113, 31);
             this.btnDeal.TabIndex = 2;
@@ -88,7 +87,7 @@ namespace LabVezba5
             // btnReplace
             // 
             this.btnReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReplace.Location = new System.Drawing.Point(459, 119);
+            this.btnReplace.Location = new System.Drawing.Point(459, 161);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(113, 31);
             this.btnReplace.TabIndex = 3;
@@ -107,17 +106,6 @@ namespace LabVezba5
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // btnSeeCC
-            // 
-            this.btnSeeCC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeeCC.Location = new System.Drawing.Point(459, 161);
-            this.btnSeeCC.Name = "btnSeeCC";
-            this.btnSeeCC.Size = new System.Drawing.Size(113, 31);
-            this.btnSeeCC.TabIndex = 5;
-            this.btnSeeCC.Text = "See CC";
-            this.btnSeeCC.UseVisualStyleBackColor = true;
-            this.btnSeeCC.Click += new System.EventHandler(this.btnSeeCC_Click);
-            // 
             // cbxReplace
             // 
             this.cbxReplace.DisplayMember = "0, 1, 2, 3";
@@ -128,7 +116,7 @@ namespace LabVezba5
             "1",
             "2",
             "3"});
-            this.cbxReplace.Location = new System.Drawing.Point(459, 92);
+            this.cbxReplace.Location = new System.Drawing.Point(459, 124);
             this.cbxReplace.Name = "cbxReplace";
             this.cbxReplace.Size = new System.Drawing.Size(113, 21);
             this.cbxReplace.TabIndex = 6;
@@ -137,7 +125,7 @@ namespace LabVezba5
             // 
             this.lblReplace.AutoSize = true;
             this.lblReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReplace.Location = new System.Drawing.Point(456, 72);
+            this.lblReplace.Location = new System.Drawing.Point(456, 104);
             this.lblReplace.Name = "lblReplace";
             this.lblReplace.Size = new System.Drawing.Size(116, 17);
             this.lblReplace.TabIndex = 7;
@@ -236,7 +224,6 @@ namespace LabVezba5
             this.Controls.Add(this.pbxFirst);
             this.Controls.Add(this.lblReplace);
             this.Controls.Add(this.cbxReplace);
-            this.Controls.Add(this.btnSeeCC);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnReplace);
             this.Controls.Add(this.btnDeal);
@@ -266,7 +253,6 @@ namespace LabVezba5
         private System.Windows.Forms.Button btnDeal;
         private System.Windows.Forms.Button btnReplace;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnSeeCC;
         private System.Windows.Forms.ComboBox cbxReplace;
         private System.Windows.Forms.Label lblReplace;
         private System.Windows.Forms.PictureBox pbxFirst;
