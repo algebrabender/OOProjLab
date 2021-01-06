@@ -46,12 +46,6 @@ namespace LabVezba5.Controllers
             this.view.SetPoints(currentPoints);
         }
 
-        public void GameOver()
-        {
-            if (!this.pointsCalculated)
-                CalculatePoints();
-        }
-
         public bool Draw()
         {
             this.currentCards = this.deck.DrawCards(5);
@@ -67,8 +61,6 @@ namespace LabVezba5.Controllers
             SetPictures();
 
             CalculatePoints();
-            this.pointsCalculated = true;
-            this.view.SetPoints(currentPoints);
 
             return true;
         }
@@ -108,10 +100,8 @@ namespace LabVezba5.Controllers
             }
 
             SetPictures();
-
             CalculatePoints();
-            //proveriti da li funkcionise kako treba/da li treba neki message
-            this.pointsCalculated = true;
+
         }
 
         public int GetPoints()
@@ -177,6 +167,8 @@ namespace LabVezba5.Controllers
                 this.currentPoints += this.view.GetBetAmount() * 2;
                 //return;
             }
+
+            this.view.SetPoints(currentPoints);
         }
 
         private bool OnePair(out Card c)
@@ -306,11 +298,13 @@ namespace LabVezba5.Controllers
 
         private bool BigBobTail()
         {
-            //not tested
-             
-            foreach(Card c in this.currentCards)
+            //not working jer straight sortira
+
+            /*for (int i = 0; i< 5; i++)
             {
+                Card c = this.currentCards[i];
                 this.currentCards.Remove(c);
+
                 if (Straight())
                 {
                     if (Flush())
@@ -319,7 +313,9 @@ namespace LabVezba5.Controllers
                         return true;
                     }
                 }
-            }
+
+                this.currentCards.Add(c);
+            }*/
 
             return false;
         }

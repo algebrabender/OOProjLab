@@ -40,18 +40,18 @@ namespace LabVezba5.Models
             {
                 card = new Card(Suits.CLUBS, i.ToString());
                 deck.Add(card);
-                /*card = new Card(Suits.DIAMONDS, i.ToString());
+                card = new Card(Suits.DIAMONDS, i.ToString());
                 deck.Add(card);
                 card = new Card(Suits.HEARTS, i.ToString());
                 deck.Add(card);
                 card = new Card(Suits.SPADES, i.ToString());
-                deck.Add(card);*/
+                deck.Add(card);
             }
         }
 
         public void FillDeck()
         {
-            AddCards(2, 7);
+            AddCards(1, 14);
         }
 
         public void ShuffleDeck(List<Card> currentDeck)

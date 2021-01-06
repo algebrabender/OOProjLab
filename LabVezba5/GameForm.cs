@@ -102,8 +102,6 @@ namespace LabVezba5
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            this.controller.GameOver();
-
             lblPoints.Text = this.controller.GetPoints().ToString();
 
             MessageBox.Show("The Game has ended\nFinal score: " + lblPoints.Text, "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

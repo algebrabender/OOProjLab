@@ -11,7 +11,6 @@ namespace LabVezba5.Controllers
     public interface IController
     {
         void Start();
-        void GameOver();
         bool Draw();
         void SetPictures();
         void ReplaceToggle(int numOfCards);

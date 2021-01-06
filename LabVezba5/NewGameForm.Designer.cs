@@ -54,7 +54,7 @@ namespace LabVezba5
             this.btnStart.Location = new System.Drawing.Point(39, 202);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(96, 32);
-            this.btnStart.TabIndex = 1;
+            this.btnStart.TabIndex = 3;
             this.btnStart.Text = "Start Game";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -65,7 +65,7 @@ namespace LabVezba5
             this.btnExit.Location = new System.Drawing.Point(147, 202);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(96, 32);
-            this.btnExit.TabIndex = 7;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit Game";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -85,7 +85,7 @@ namespace LabVezba5
             this.tbxPoints.Location = new System.Drawing.Point(39, 93);
             this.tbxPoints.Name = "tbxPoints";
             this.tbxPoints.Size = new System.Drawing.Size(204, 20);
-            this.tbxPoints.TabIndex = 6;
+            this.tbxPoints.TabIndex = 1;
             this.tbxPoints.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxPoints_KeyPress);
             // 
             // tbxBetAmount
@@ -93,7 +93,7 @@ namespace LabVezba5
             this.tbxBetAmount.Location = new System.Drawing.Point(39, 157);
             this.tbxBetAmount.Name = "tbxBetAmount";
             this.tbxBetAmount.Size = new System.Drawing.Size(204, 20);
-            this.tbxBetAmount.TabIndex = 15;
+            this.tbxBetAmount.TabIndex = 2;
             this.tbxBetAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxBetAmount_KeyPress);
             // 
             // lblBetAmount
