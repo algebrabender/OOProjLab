@@ -57,7 +57,12 @@ namespace LabVezba5.Models
 
         #endregion
 
-        #region Constructor
+        #region Constructors
+
+        public Card()
+        {
+
+        }
 
         public Card(Suits suit, String cardNumber)
         {
