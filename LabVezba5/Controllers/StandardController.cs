@@ -115,57 +115,47 @@ namespace LabVezba5.Controllers
 
         private void CalculatePoints()
         {
-            Card temp = new Card();
+            Card temp;
 
             if (StraightFlush())
             {
                 this.currentPoints += this.view.GetBetAmount() * 100;
-                //return;
             }
             else if (FourOfAKind())
             {
                 this.currentPoints += this.view.GetBetAmount() * 60;
-                //return;
             }
             else if (BigBobTail())
             {
                 this.currentPoints += this.view.GetBetAmount() * 40;
-                //return;
             }
             else if(FullHouse())
             {
                 this.currentPoints += this.view.GetBetAmount() * 24;
-                //return;
             }
             else if (Flush())
             {
                 this.currentPoints += this.view.GetBetAmount() * 16;
-                //return;
             }
             else if(Straight())
             {
                 this.currentPoints += this.view.GetBetAmount() * 12;
-                //return;
             }
             else if(Blaze())
             {
                 this.currentPoints += this.view.GetBetAmount() * 9;
-                //return;
             }
             else if (ThreeOFAKind(out temp))
             {
                 this.currentPoints += this.view.GetBetAmount() * 6;
-                //return;
             }
             else if (TwoPair())
             {
                 this.currentPoints += this.view.GetBetAmount() * 4;
-                //return;
             }
             else if (OnePair(out temp))
             {
                 this.currentPoints += this.view.GetBetAmount() * 2;
-                //return;
             }
 
             this.view.SetPoints(currentPoints);
@@ -203,7 +193,10 @@ namespace LabVezba5.Controllers
                     for (int j = i + 1; j < this.currentCards.Count; j++)
                     {
                         if (this.currentCards[i].CardValue == this.currentCards[j].CardValue)
+                        {
+                            this.currentCards.Add(temp);
                             return true;
+                        }
                     }
                 }
 
@@ -251,15 +244,26 @@ namespace LabVezba5.Controllers
 
         private bool Straight()
         {
-            //samo base slucajevi treba dodati za A
-
             this.currentCards.Sort((x, y) => y.CardValue.CompareTo(x.CardValue));
 
-            if (this.currentCards[0].CardValue == this.currentCards[1].CardValue +1) //1-2
+            if (this.currentCards[4].CardValue == 1)
+            {
+                //provera za A-K-Q-J-10
+                if (this.currentCards[0].CardNumber == "K")
+                {
+                    if (this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1) //K-Q
+                        if (this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) //Q-J
+                            if (this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1) //J-10
+                                return true;
+                }
+            }
+
+            if (this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1) //1-2
                 if (this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) //2-3
                     if (this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1) //3-4
                         if (this.currentCards[3].CardValue == this.currentCards[4].CardValue + 1) //4-5
                             return true;
+
             return false;
         }
 
@@ -298,24 +302,30 @@ namespace LabVezba5.Controllers
 
         private bool BigBobTail()
         {
-            //not working jer straight sortira
+            //treba provera ako ima mozda dve iste karte
 
-            /*for (int i = 0; i< 5; i++)
+            this.currentCards.Sort((x, y) => y.CardValue.CompareTo(x.CardValue));
+
+            if (this.currentCards[4].CardValue == 1)
             {
-                Card c = this.currentCards[i];
-                this.currentCards.Remove(c);
-
-                if (Straight())
+                //provera za A-K-Q-J
+                if (this.currentCards[0].CardNumber == "K" && (this.currentCards[0].Suit == this.currentCards[4].Suit))
                 {
-                    if (Flush())
-                    {
-                        this.currentCards.Add(c);
-                        return true;
-                    }
+                    if ((this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1) && (this.currentCards[0].Suit == this.currentCards[1].Suit))//K-Q
+                        if ((this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) && (this.currentCards[1].Suit == this.currentCards[2].Suit)) //Q-J
+                            return true;
                 }
+            }
 
-                this.currentCards.Add(c);
-            }*/
+            if ((this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1) && (this.currentCards[0].Suit == this.currentCards[1].Suit)) //1-2
+                if ((this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) && (this.currentCards[1].Suit == this.currentCards[2].Suit)) //2-3
+                    if ((this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1) && (this.currentCards[2].Suit == this.currentCards[3].Suit)) //3-4
+                        return true;
+
+            if ((this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) && (this.currentCards[1].Suit == this.currentCards[2].Suit)) //2-3
+                if ((this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1) && (this.currentCards[2].Suit == this.currentCards[3].Suit)) //3-4
+                    if ((this.currentCards[3].CardValue == this.currentCards[4].CardValue + 1) && (this.currentCards[3].Suit == this.currentCards[4].Suit)) //4-5
+                        return true;
 
             return false;
         }
@@ -352,8 +362,8 @@ namespace LabVezba5.Controllers
 
         private bool StraightFlush()
         {
-            if (Straight())
-                return Flush();
+            if (Flush())
+                return Straight();
 
             return false;
         }
