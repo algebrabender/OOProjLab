@@ -14,5 +14,6 @@ namespace LabVezba5.View
         void SetPoints(int points);
         int GetBetAmount();
         List<PictureBox> GetPictureBoxes();
+        void SetWonPoints(int points);
     }
 }

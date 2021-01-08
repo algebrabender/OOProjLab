@@ -13,7 +13,7 @@ namespace LabVezba5.Controllers
         void Start();
         bool Draw();
         void SetPictures();
-        void ReplaceToggle(int numOfCards);
+        void Replace(int numOfCards);
         int GetPoints();
     }
 }

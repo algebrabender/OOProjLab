@@ -46,6 +46,10 @@ namespace LabVezba5
             this.pbxSecond = new System.Windows.Forms.PictureBox();
             this.pbxFirst = new System.Windows.Forms.PictureBox();
             this.lblText = new System.Windows.Forms.Label();
+            this.lblBetPoints = new System.Windows.Forms.Label();
+            this.lblBet = new System.Windows.Forms.Label();
+            this.lblPointsWon = new System.Windows.Forms.Label();
+            this.lblWonPoints = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFifth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFourth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxThird)).BeginInit();
@@ -208,11 +212,54 @@ namespace LabVezba5
             this.lblText.TabIndex = 16;
             this.lblText.Text = "lblText";
             // 
+            // lblBetPoints
+            // 
+            this.lblBetPoints.AutoSize = true;
+            this.lblBetPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBetPoints.Location = new System.Drawing.Point(300, 38);
+            this.lblBetPoints.Name = "lblBetPoints";
+            this.lblBetPoints.Size = new System.Drawing.Size(46, 17);
+            this.lblBetPoints.TabIndex = 18;
+            this.lblBetPoints.Text = "points";
+            // 
+            // lblBet
+            // 
+            this.lblBet.AutoSize = true;
+            this.lblBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBet.Location = new System.Drawing.Point(175, 38);
+            this.lblBet.Name = "lblBet";
+            this.lblBet.Size = new System.Drawing.Size(127, 17);
+            this.lblBet.TabIndex = 17;
+            this.lblBet.Text = "Taken bet amount:";
+            // 
+            // lblPointsWon
+            // 
+            this.lblPointsWon.AutoSize = true;
+            this.lblPointsWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPointsWon.Location = new System.Drawing.Point(175, 64);
+            this.lblPointsWon.Name = "lblPointsWon";
+            this.lblPointsWon.Size = new System.Drawing.Size(197, 17);
+            this.lblPointsWon.TabIndex = 19;
+            this.lblPointsWon.Text = "Points won from current hand:";
+            // 
+            // lblWonPoints
+            // 
+            this.lblWonPoints.AutoSize = true;
+            this.lblWonPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWonPoints.Location = new System.Drawing.Point(372, 64);
+            this.lblWonPoints.Name = "lblWonPoints";
+            this.lblWonPoints.Size = new System.Drawing.Size(0, 17);
+            this.lblWonPoints.TabIndex = 20;
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 261);
+            this.Controls.Add(this.lblWonPoints);
+            this.Controls.Add(this.lblPointsWon);
+            this.Controls.Add(this.lblBetPoints);
+            this.Controls.Add(this.lblBet);
             this.Controls.Add(this.lblText);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.tbxBetAmount);
@@ -264,5 +311,9 @@ namespace LabVezba5
         private System.Windows.Forms.Label lblBetAmount;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblText;
+        private System.Windows.Forms.Label lblBetPoints;
+        private System.Windows.Forms.Label lblBet;
+        private System.Windows.Forms.Label lblPointsWon;
+        private System.Windows.Forms.Label lblWonPoints;
     }
 }

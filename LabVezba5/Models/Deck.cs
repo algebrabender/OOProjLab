@@ -15,6 +15,8 @@ namespace LabVezba5.Models
 
     public class Deck : IModel
     {
+        //koriscenje MVC patterna kao sto je bilo naznaceno u prvoj verziji lab vezbe
+
         #region Attributes
 
         private List<Card> deck;
@@ -100,6 +102,7 @@ namespace LabVezba5.Models
             foreach (Card c in currentDeck)
                 list.Add(c.Img);
 
+            //dodavanje backcover
             list.Add(currentDeck[0].CoverImg);
 
             return list;

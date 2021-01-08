@@ -88,7 +88,7 @@ namespace LabVezba5.Controllers
                 list[i].Image = images[5];
         }
 
-        public void ReplaceToggle(int numOfCards)
+        public void Replace(int numOfCards)
         {
             count++;
             if (count > 3)

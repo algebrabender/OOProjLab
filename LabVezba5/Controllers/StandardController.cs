@@ -12,6 +12,8 @@ namespace LabVezba5.Controllers
 {
     class StandardController : IController
     {
+        //koriscenje MVC patterna kao sto je bilo naznaceno u prvoj verziji lab vezbe
+
         #region Attributes
 
         private IModel deck;
@@ -49,16 +51,19 @@ namespace LabVezba5.Controllers
         {
             this.currentCards = this.deck.DrawCards(5);
 
+            //nema vise karata za deljenje
             if (currentCards == null)
                 return false;
 
             this.currentPoints -= this.view.GetBetAmount();
 
+            //igra zavrsena
             if (currentPoints == 0)
                 return false;
 
             SetPictures();
 
+            //provera da li trenutne kartet povecavaju poene
             CalculatePoints();
 
             return true;
@@ -73,7 +78,7 @@ namespace LabVezba5.Controllers
                 list[i].Image = images[i]; 
         }
 
-        public void ReplaceToggle(int numOfCards)
+        public void Replace(int numOfCards)
         {
             if (numOfCards == 0)
             {
@@ -118,44 +123,66 @@ namespace LabVezba5.Controllers
 
             if (StraightFlush())
             {
-                this.currentPoints += this.view.GetBetAmount() * 100;
+                int wonPoints = this.view.GetBetAmount() * 100;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if (FourOfAKind())
             {
-                this.currentPoints += this.view.GetBetAmount() * 60;
+                int wonPoints = this.view.GetBetAmount() * 60;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if (BigBobTail())
             {
-                this.currentPoints += this.view.GetBetAmount() * 40;
+                int wonPoints = this.view.GetBetAmount() * 40;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if(FullHouse())
             {
-                this.currentPoints += this.view.GetBetAmount() * 24;
+                int wonPoints = this.view.GetBetAmount() * 24;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if (Flush())
             {
-                this.currentPoints += this.view.GetBetAmount() * 16;
+                int wonPoints = this.view.GetBetAmount() * 16;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if(Straight())
             {
-                this.currentPoints += this.view.GetBetAmount() * 12;
+                int wonPoints = this.view.GetBetAmount() * 12;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if(Blaze())
             {
-                this.currentPoints += this.view.GetBetAmount() * 9;
+                int wonPoints = this.view.GetBetAmount() * 9;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if (ThreeOFAKind(out temp))
             {
-                this.currentPoints += this.view.GetBetAmount() * 6;
+                int wonPoints = this.view.GetBetAmount() * 6;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if (TwoPair())
             {
-                this.currentPoints += this.view.GetBetAmount() * 4;
+                int wonPoints = this.view.GetBetAmount() * 4;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
             else if (OnePair(out temp))
             {
-                this.currentPoints += this.view.GetBetAmount() * 2;
+                int wonPoints = this.view.GetBetAmount() * 2;
+                this.currentPoints += wonPoints;
+                this.view.SetWonPoints(wonPoints);
             }
+            else //novi poeni nisu osvojeni
+                this.view.SetWonPoints(0);
 
             this.view.SetPoints(currentPoints);
         }

@@ -109,6 +109,8 @@ namespace LabVezba5.Models
             SetImage(imgName);
         }
 
+        #endregion
+
         private void SetImage(String imgName)
         {
             //uzima sve fajlove iz foldera sa kartama
@@ -123,11 +125,10 @@ namespace LabVezba5.Models
                 if (woExtension == imgName)
                     this.img = Image.FromFile(cardImg);
 
+                //postavljanje backcover
                 if (woExtension == "yellow_back")
                     this.coverImg = Image.FromFile(cardImg);
             }
-        }
-
-        #endregion
+        }        
     }
 }

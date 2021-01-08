@@ -14,6 +14,8 @@ namespace LabVezba5
 {
     public partial class GameForm : Form, IView
     {
+        //koriscenje MVC patterna kao sto je bilo naznaceno u prvoj verziji lab vezbe
+
         #region Attributes
 
         private IController controller;
@@ -32,6 +34,7 @@ namespace LabVezba5
         {
             this.controller = new StandardController(this, startPoints);
             tbxBetAmount.Text = betAmount.ToString();
+            lblBetPoints.Text = betAmount.ToString();
             lblText.Text = "You can either Replace cards or Deal new set of cards.\nIf you want to finish game click on Stop";
         }
 
@@ -66,6 +69,11 @@ namespace LabVezba5
             return list;
         }
 
+        public void SetWonPoints(int points)
+        {
+            lblWonPoints.Text = points.ToString();
+        }
+
         #endregion
 
         #region Event Handlers
@@ -82,6 +90,8 @@ namespace LabVezba5
                 MessageBox.Show("Bet amount not entered", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            lblBetPoints.Text = tbxBetAmount.Text;
 
             if (!controller.Draw())
             {
@@ -116,7 +126,7 @@ namespace LabVezba5
                 return;
             }
 
-            this.controller.ReplaceToggle(cbxReplace.SelectedIndex);
+            this.controller.Replace(cbxReplace.SelectedIndex);
             cbxReplace.SelectedIndex = -1;
         }
 
