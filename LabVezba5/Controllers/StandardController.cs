@@ -83,8 +83,10 @@ namespace LabVezba5.Controllers
             if (numOfCards == 0)
             {
                 if (this.pointsCalculated)
+                {
+                    this.view.SetWonPoints(0);
                     return;
-
+                }
                 CalculatePoints();
 
                 //zbog sortiranja u proverama potrebno resetovati slike
@@ -138,7 +140,7 @@ namespace LabVezba5.Controllers
 
         public int GetPoints()
         {
-            if (!this.pointsCalculated)
+            if (!this.pointsCalculated && this.currentCards != null)
             {
                 CalculatePoints();
 
@@ -147,6 +149,7 @@ namespace LabVezba5.Controllers
             
                 this.pointsCalculated = true;
             }
+
             return this.currentPoints;
         }
 
