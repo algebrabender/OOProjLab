@@ -33,10 +33,8 @@ namespace LabVezba5
             this.lblStartPoints = new System.Windows.Forms.Label();
             this.lblPoints = new System.Windows.Forms.Label();
             this.btnDeal = new System.Windows.Forms.Button();
-            this.btnReplace = new System.Windows.Forms.Button();
+            this.btnCalc = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.cbxReplace = new System.Windows.Forms.ComboBox();
-            this.lblReplace = new System.Windows.Forms.Label();
             this.tbxBetAmount = new System.Windows.Forms.TextBox();
             this.lblBetAmount = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -50,6 +48,7 @@ namespace LabVezba5
             this.lblBet = new System.Windows.Forms.Label();
             this.lblPointsWon = new System.Windows.Forms.Label();
             this.lblWonPoints = new System.Windows.Forms.Label();
+            this.btnReplace = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFifth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFourth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxThird)).BeginInit();
@@ -80,7 +79,7 @@ namespace LabVezba5
             // btnDeal
             // 
             this.btnDeal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeal.Location = new System.Drawing.Point(459, 57);
+            this.btnDeal.Location = new System.Drawing.Point(459, 87);
             this.btnDeal.Name = "btnDeal";
             this.btnDeal.Size = new System.Drawing.Size(113, 31);
             this.btnDeal.TabIndex = 2;
@@ -88,16 +87,16 @@ namespace LabVezba5
             this.btnDeal.UseVisualStyleBackColor = true;
             this.btnDeal.Click += new System.EventHandler(this.btnDeal_Click);
             // 
-            // btnReplace
+            // btnCalc
             // 
-            this.btnReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReplace.Location = new System.Drawing.Point(459, 161);
-            this.btnReplace.Name = "btnReplace";
-            this.btnReplace.Size = new System.Drawing.Size(113, 31);
-            this.btnReplace.TabIndex = 3;
-            this.btnReplace.Text = "Replace";
-            this.btnReplace.UseVisualStyleBackColor = true;
-            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
+            this.btnCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalc.Location = new System.Drawing.Point(459, 124);
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Size = new System.Drawing.Size(113, 31);
+            this.btnCalc.TabIndex = 3;
+            this.btnCalc.Text = "Calculate";
+            this.btnCalc.UseVisualStyleBackColor = true;
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
             // btnStop
             // 
@@ -109,31 +108,6 @@ namespace LabVezba5
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // cbxReplace
-            // 
-            this.cbxReplace.DisplayMember = "0, 1, 2, 3";
-            this.cbxReplace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxReplace.FormattingEnabled = true;
-            this.cbxReplace.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3"});
-            this.cbxReplace.Location = new System.Drawing.Point(459, 124);
-            this.cbxReplace.Name = "cbxReplace";
-            this.cbxReplace.Size = new System.Drawing.Size(113, 21);
-            this.cbxReplace.TabIndex = 6;
-            // 
-            // lblReplace
-            // 
-            this.lblReplace.AutoSize = true;
-            this.lblReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReplace.Location = new System.Drawing.Point(456, 104);
-            this.lblReplace.Name = "lblReplace";
-            this.lblReplace.Size = new System.Drawing.Size(116, 17);
-            this.lblReplace.TabIndex = 7;
-            this.lblReplace.Text = "Cards to replace:";
             // 
             // tbxBetAmount
             // 
@@ -170,6 +144,7 @@ namespace LabVezba5
             this.pbxFifth.Size = new System.Drawing.Size(65, 100);
             this.pbxFifth.TabIndex = 12;
             this.pbxFifth.TabStop = false;
+            this.pbxFifth.Click += new System.EventHandler(this.pbxFifth_Click);
             // 
             // pbxFourth
             // 
@@ -178,6 +153,7 @@ namespace LabVezba5
             this.pbxFourth.Size = new System.Drawing.Size(65, 100);
             this.pbxFourth.TabIndex = 11;
             this.pbxFourth.TabStop = false;
+            this.pbxFourth.Click += new System.EventHandler(this.pbxFourth_Click);
             // 
             // pbxThird
             // 
@@ -186,6 +162,7 @@ namespace LabVezba5
             this.pbxThird.Size = new System.Drawing.Size(65, 100);
             this.pbxThird.TabIndex = 10;
             this.pbxThird.TabStop = false;
+            this.pbxThird.Click += new System.EventHandler(this.pbxThird_Click);
             // 
             // pbxSecond
             // 
@@ -194,6 +171,7 @@ namespace LabVezba5
             this.pbxSecond.Size = new System.Drawing.Size(65, 100);
             this.pbxSecond.TabIndex = 9;
             this.pbxSecond.TabStop = false;
+            this.pbxSecond.Click += new System.EventHandler(this.pbxSecond_Click);
             // 
             // pbxFirst
             // 
@@ -202,6 +180,7 @@ namespace LabVezba5
             this.pbxFirst.Size = new System.Drawing.Size(65, 100);
             this.pbxFirst.TabIndex = 8;
             this.pbxFirst.TabStop = false;
+            this.pbxFirst.Click += new System.EventHandler(this.pbxFirst_Click);
             // 
             // lblText
             // 
@@ -251,11 +230,23 @@ namespace LabVezba5
             this.lblWonPoints.Size = new System.Drawing.Size(0, 17);
             this.lblWonPoints.TabIndex = 20;
             // 
+            // btnReplace
+            // 
+            this.btnReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReplace.Location = new System.Drawing.Point(459, 161);
+            this.btnReplace.Name = "btnReplace";
+            this.btnReplace.Size = new System.Drawing.Size(113, 31);
+            this.btnReplace.TabIndex = 21;
+            this.btnReplace.Text = "Replace";
+            this.btnReplace.UseVisualStyleBackColor = true;
+            this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 261);
+            this.Controls.Add(this.btnReplace);
             this.Controls.Add(this.lblWonPoints);
             this.Controls.Add(this.lblPointsWon);
             this.Controls.Add(this.lblBetPoints);
@@ -269,10 +260,8 @@ namespace LabVezba5
             this.Controls.Add(this.pbxThird);
             this.Controls.Add(this.pbxSecond);
             this.Controls.Add(this.pbxFirst);
-            this.Controls.Add(this.lblReplace);
-            this.Controls.Add(this.cbxReplace);
             this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.btnReplace);
+            this.Controls.Add(this.btnCalc);
             this.Controls.Add(this.btnDeal);
             this.Controls.Add(this.lblPoints);
             this.Controls.Add(this.lblStartPoints);
@@ -298,10 +287,8 @@ namespace LabVezba5
         private System.Windows.Forms.Label lblStartPoints;
         private System.Windows.Forms.Label lblPoints;
         private System.Windows.Forms.Button btnDeal;
-        private System.Windows.Forms.Button btnReplace;
+        private System.Windows.Forms.Button btnCalc;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.ComboBox cbxReplace;
-        private System.Windows.Forms.Label lblReplace;
         private System.Windows.Forms.PictureBox pbxFirst;
         private System.Windows.Forms.PictureBox pbxSecond;
         private System.Windows.Forms.PictureBox pbxThird;
@@ -315,5 +302,6 @@ namespace LabVezba5
         private System.Windows.Forms.Label lblBet;
         private System.Windows.Forms.Label lblPointsWon;
         private System.Windows.Forms.Label lblWonPoints;
+        private System.Windows.Forms.Button btnReplace;
     }
 }

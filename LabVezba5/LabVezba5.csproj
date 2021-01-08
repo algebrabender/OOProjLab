@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\StandardController.cs" />
-    <Compile Include="Controllers\TexasController.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>

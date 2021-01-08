@@ -19,6 +19,8 @@ namespace LabVezba5
         #region Attributes
 
         private IController controller;
+        private int count;
+        private List<Image> selectedCards;
 
         #endregion
 
@@ -35,7 +37,9 @@ namespace LabVezba5
             this.controller = new StandardController(this, startPoints);
             tbxBetAmount.Text = betAmount.ToString();
             lblBetPoints.Text = betAmount.ToString();
-            lblText.Text = "You can either Replace cards or Deal new set of cards.\nIf you want to finish game click on Stop";
+            lblText.Text = "You can either Replace cards or Deal new set of cards.If you want to finish game click on Stop\nCards may change place due to checks";
+
+            this.selectedCards = new List<Image>();
         }
 
         #endregion
@@ -104,8 +108,8 @@ namespace LabVezba5
                 {
                     MessageBox.Show("No more cards for dealing", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btnDeal.Enabled = false;
+                    btnCalc.Enabled = false;
                     btnReplace.Enabled = false;
-                    cbxReplace.Enabled = false;
                 }
             }
         }
@@ -118,16 +122,18 @@ namespace LabVezba5
             this.Close();
         }
 
+        private void btnCalc_Click(object sender, EventArgs e)
+        {
+            lblPoints.Text = this.controller.GetPoints().ToString();
+            count = 0;
+            this.selectedCards = new List<Image>();
+        }
+
         private void btnReplace_Click(object sender, EventArgs e)
         {
-            if (cbxReplace.SelectedIndex == -1)
-            {
-                MessageBox.Show("Number must be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            this.controller.Replace(cbxReplace.SelectedIndex);
-            cbxReplace.SelectedIndex = -1;
+            this.controller.Replace(count, selectedCards);
+            count = 0;
+            this.selectedCards = new List<Image>();
         }
 
         private void tbxBetAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -137,6 +143,96 @@ namespace LabVezba5
                 e.Handled = true;
                 MessageBox.Show("Only numbers allowed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void pbxFirst_Click(object sender, EventArgs e)
+        {
+            if (count == 3)
+            {
+                MessageBox.Show("Only three cards can be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.selectedCards.Contains(pbxFirst.Image))
+            {
+                MessageBox.Show("Card already selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            count++;
+            this.selectedCards.Add(pbxFirst.Image);
+        }
+
+        private void pbxSecond_Click(object sender, EventArgs e)
+        {
+            if (count == 3)
+            {
+                MessageBox.Show("Only three cards can be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.selectedCards.Contains(pbxSecond.Image))
+            {
+                MessageBox.Show("Card already selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            count++;
+            this.selectedCards.Add(pbxSecond.Image);
+        }
+
+        private void pbxThird_Click(object sender, EventArgs e)
+        {
+            if (count == 3)
+            {
+                MessageBox.Show("Only three cards can be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.selectedCards.Contains(pbxThird.Image))
+            {
+                MessageBox.Show("Card already selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            count++;
+            this.selectedCards.Add(pbxThird.Image);
+        }
+
+        private void pbxFourth_Click(object sender, EventArgs e)
+        {
+            if (count == 3)
+            {
+                MessageBox.Show("Only three cards can be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.selectedCards.Contains(pbxFourth.Image))
+            {
+                MessageBox.Show("Card already selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            count++;
+            this.selectedCards.Add(pbxFourth.Image);
+        }
+
+        private void pbxFifth_Click(object sender, EventArgs e)
+        {
+            if (count == 3)
+            {
+                MessageBox.Show("Only three cards can be selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.selectedCards.Contains(pbxFifth.Image))
+            {
+                MessageBox.Show("Card already selected", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            count++;
+            this.selectedCards.Add(pbxFifth.Image);
         }
 
         #endregion

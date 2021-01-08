@@ -20,6 +20,7 @@ namespace LabVezba5.Controllers
         private IView view;
         private List<Card> currentCards;
         private int currentPoints;
+        private bool pointsCalculated = false;
 
         #endregion
 
@@ -58,13 +59,12 @@ namespace LabVezba5.Controllers
             this.currentPoints -= this.view.GetBetAmount();
 
             //igra zavrsena
-            if (currentPoints == 0)
+            if (currentPoints <=0)
                 return false;
 
             SetPictures();
 
-            //provera da li trenutne kartet povecavaju poene
-            CalculatePoints();
+            this.pointsCalculated = false;
 
             return true;
         }
@@ -78,36 +78,75 @@ namespace LabVezba5.Controllers
                 list[i].Image = images[i]; 
         }
 
-        public void Replace(int numOfCards)
+        public void Replace(int numOfCards, List<Image> list)
         {
-            //ako je izabrano 0 karata za replace nije potrebno nista raditi
             if (numOfCards == 0)
+            {
+                if (this.pointsCalculated)
+                    return;
+
+                CalculatePoints();
+
+                //zbog sortiranja u proverama potrebno resetovati slike
+                SetPictures();
+
+                this.pointsCalculated = true;
+                
                 return;
-            
+            }
+
             Random rand = new Random();
 
             List<Card> currentDeck = this.deck.GetDeck();
             
             this.deck.ShuffleDeck(currentDeck);
 
-            Card forSwapping;
+            int []index = new int[numOfCards];
+            
+            Card card;
+
+            int j = 0;
+
+            for (int i = 0; i< this.currentCards.Count -1; i++)
+            {
+                foreach (Image img in list)
+                {
+                    if (this.currentCards[i].Img == img)
+                    {
+                        index[j] = i;
+                        j++;
+                        break;
+                    }
+                }
+            }
 
             for (int i = 0; i < numOfCards; i++)
             {
-                forSwapping = currentDeck[rand.Next(0, currentDeck.Count - 1)];
-                currentDeck.Remove(forSwapping);
-                int index = rand.Next(0, 5);
-                currentDeck.Add(currentCards[index]);
-                this.currentCards[index] = forSwapping;
+                card = currentDeck[rand.Next(0, currentDeck.Count - 1)];
+                currentDeck.Remove(card);
+                currentDeck.Add(this.currentCards[index[i]]);
+                this.currentCards[index[i]] = card;
             }
 
-            SetPictures();
             CalculatePoints();
 
+            //zbog sortiranja u proverama potrebno resetovati slike
+            SetPictures();
+            
+            this.pointsCalculated = true;
         }
 
         public int GetPoints()
         {
+            if (!this.pointsCalculated)
+            {
+                CalculatePoints();
+
+                //zbog sortiranja u proverama potrebno resetovati slike
+                SetPictures();
+            
+                this.pointsCalculated = true;
+            }
             return this.currentPoints;
         }
 
@@ -326,8 +365,6 @@ namespace LabVezba5.Controllers
 
         private bool BigBobTail()
         {
-            //treba provera ako ima mozda dve iste karte
-
             this.currentCards.Sort((x, y) => y.CardValue.CompareTo(x.CardValue));
 
             if (this.currentCards[4].CardValue == 1)
@@ -358,8 +395,6 @@ namespace LabVezba5.Controllers
 
         private bool FourOfAKind()
         {
-            //potencijalno optimizovati
-
             for (int i = 0; i < this.currentCards.Count - 2; i++)
             {
                 for (int j = i + 1; j < this.currentCards.Count - 1; j++)
