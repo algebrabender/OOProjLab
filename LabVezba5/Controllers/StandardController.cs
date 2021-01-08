@@ -80,12 +80,10 @@ namespace LabVezba5.Controllers
 
         public void Replace(int numOfCards)
         {
+            //ako je izabrano 0 karata za replace nije potrebno nista raditi
             if (numOfCards == 0)
-            {
-                CalculatePoints();
                 return;
-            }
-
+            
             Random rand = new Random();
 
             List<Card> currentDeck = this.deck.GetDeck();
