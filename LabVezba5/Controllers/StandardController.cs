@@ -18,7 +18,6 @@ namespace LabVezba5.Controllers
         private IView view;
         private List<Card> currentCards;
         private int currentPoints;
-        private bool pointsCalculated;
 
         #endregion
 
@@ -309,22 +308,24 @@ namespace LabVezba5.Controllers
             if (this.currentCards[4].CardValue == 1)
             {
                 //provera za A-K-Q-J
-                if (this.currentCards[0].CardNumber == "K" && (this.currentCards[0].Suit == this.currentCards[4].Suit))
+                if ((this.currentCards[0].Suit == this.currentCards[4].Suit) && this.currentCards[0].CardNumber == "K")
                 {
-                    if ((this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1) && (this.currentCards[0].Suit == this.currentCards[1].Suit))//K-Q
-                        if ((this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) && (this.currentCards[1].Suit == this.currentCards[2].Suit)) //Q-J
+                    //potencijalno mogu biti i iste karte za redom jer su nam potrebne 4 iste
+                    if ((this.currentCards[0].Suit == this.currentCards[1].Suit) && (this.currentCards[0].CardValue == this.currentCards[1].CardValue) && (this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1))//K-Q
+                        if ((this.currentCards[1].Suit == this.currentCards[2].Suit) && (this.currentCards[0].CardValue == this.currentCards[1].CardValue) && (this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1)) //Q-J
                             return true;
                 }
             }
 
-            if ((this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1) && (this.currentCards[0].Suit == this.currentCards[1].Suit)) //1-2
-                if ((this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) && (this.currentCards[1].Suit == this.currentCards[2].Suit)) //2-3
-                    if ((this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1) && (this.currentCards[2].Suit == this.currentCards[3].Suit)) //3-4
+            //potencijalno mogu biti i iste karte za redom jer su nam potrebne 4 iste
+            if ((this.currentCards[0].Suit == this.currentCards[1].Suit) && ((this.currentCards[0].CardValue == this.currentCards[1].CardValue) || (this.currentCards[0].CardValue == this.currentCards[1].CardValue + 1))) //1-2
+                if ((this.currentCards[1].Suit == this.currentCards[2].Suit) && ((this.currentCards[1].CardValue == this.currentCards[2].CardValue) || (this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1))) //2-3
+                    if ((this.currentCards[2].Suit == this.currentCards[3].Suit) && ((this.currentCards[2].CardValue == this.currentCards[3].CardValue) || (this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1))) //3-4
                         return true;
 
-            if ((this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1) && (this.currentCards[1].Suit == this.currentCards[2].Suit)) //2-3
-                if ((this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1) && (this.currentCards[2].Suit == this.currentCards[3].Suit)) //3-4
-                    if ((this.currentCards[3].CardValue == this.currentCards[4].CardValue + 1) && (this.currentCards[3].Suit == this.currentCards[4].Suit)) //4-5
+            if ((this.currentCards[1].Suit == this.currentCards[2].Suit) && ((this.currentCards[1].CardValue == this.currentCards[2].CardValue) || (this.currentCards[1].CardValue == this.currentCards[2].CardValue + 1))) //1-2
+                if ((this.currentCards[2].Suit == this.currentCards[3].Suit) && ((this.currentCards[2].CardValue == this.currentCards[3].CardValue) || (this.currentCards[2].CardValue == this.currentCards[3].CardValue + 1))) //2-3
+                    if ((this.currentCards[3].Suit == this.currentCards[4].Suit) && ((this.currentCards[3].CardValue == this.currentCards[4].CardValue) || (this.currentCards[3].CardValue == this.currentCards[4].CardValue + 1))) //3-4
                         return true;
 
             return false;
